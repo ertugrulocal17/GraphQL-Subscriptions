@@ -1,0 +1,132 @@
+# User
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  events: [Event!]!
+}
+input AddUserInput {
+  username: String!
+  email: String!
+}
+input UpdateUser {
+  username: String
+  email: String
+}
+
+# Event
+type Event {
+  id: ID!
+  title: String!
+  desc: String!
+  date: String!
+  from: String!
+  to: String!
+  location_id: Int!
+  user_id: Int!
+  user: User
+  location: Location
+  participants: [Participant!]!
+}
+input AddEvent {
+  title: String!
+  desc: String!
+  date: String!
+  from: String!
+  to: String!
+  location_id: ID!
+  user_id: ID!
+}
+input UpdateEvent {
+  title: String
+  desc: String
+  date: String
+  from: String
+  to: String
+  location_id: ID
+  user_id: ID
+}
+
+# Location
+type Location {
+  id: ID!
+  name: String!
+  desc: String!
+  lat: Float!
+  lng: Float!
+}
+input AddLocation {
+  name: String!
+  desc: String!
+  lat: Float!
+  lng: Float!
+}
+input UpdateLocation {
+  name: String
+  desc: String
+  lat: Float
+  lng: Float
+}
+
+# Participant
+type Participant {
+  id: ID!
+  user_id: Int!
+  event_id: Int!
+}
+input AddParticipant {
+  user_id: ID!
+  event_id: ID!
+}
+input UpdateParticipant {
+  user_id: ID
+  event_id: ID
+}
+type DeleteAllOutput {
+  count: Int!
+}
+type Query {
+  #User
+  users: [User!]!
+  user(id: ID!): User!
+  #Event
+  events: [Event!]!
+  event(id: ID!): Event!
+  #Location
+  locations: [Location!]!
+  location(id: ID!): Location!
+  #Participant
+  participants: [Participant!]!
+  participant(id: ID!): Participant!
+}
+type Mutation {
+  # User
+  addUser(data: AddUserInput!): User!
+  updateUser(id: ID!, data: UpdateUser!): User!
+  deleteUser(id: ID!): User!
+  deleteAllUser: DeleteAllOutput!
+
+  # Event
+  addEvent(data: AddEvent!): Event!
+  updateEvent(id: ID!, data: UpdateEvent!): Event!
+  deleteEvent(id: ID!): Event!
+  deleteAllEvent: DeleteAllOutput!
+
+  # Location
+  addLocation(data: AddLocation!): Location!
+  updateLocation(id: ID!, data: UpdateLocation!): Location!
+  deleteLocation(id: ID!): Location!
+  deleteAllLocation: DeleteAllOutput!
+
+  # Participant
+  addParticipant(data: AddParticipant!): Participant!
+  updateParticipant(id: ID!, data: UpdateParticipant!): Participant!
+  deleteParticipant(id: ID!): Participant!
+  deleteAllParticipant: DeleteAllOutput!
+}
+
+type Subscription {
+  userCreated: User!
+  eventCreated: Event!
+  participantAdded: Participant!
+}

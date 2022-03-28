@@ -26,3 +26,29 @@ export const EVENT_SUBSCRIPTION = gql`
   }
   ${eventFragment}
 `;
+
+export const NEW_EVENT_MUTATION = gql`
+  mutation addEvent($data: AddEvent!) {
+    addEvent(data: $data) {
+      id
+    }
+  }
+`;
+
+export const GET_ALL_USER = gql`
+  query getAllUsers {
+    users {
+      id
+      username
+    }
+  }
+`;
+
+export const GET_ALL_LOCATION = gql`
+  query getAllLocation {
+    locations {
+      id
+      name
+    }
+  }
+`;

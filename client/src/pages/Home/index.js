@@ -3,7 +3,7 @@ import { List, Skeleton } from "antd";
 import { useQuery } from "@apollo/client";
 import { EVENT_SUBSCRIPTION, GET_EVENTS } from "./queries";
 import { Link } from "react-router-dom";
-
+import NewEventForm from "./NewEventForm";
 function Home() {
   const { loading, error, data, subscribeToMore } = useQuery(GET_EVENTS);
 
@@ -28,6 +28,7 @@ function Home() {
 
   return (
     <div>
+      <NewEventForm />
       <List
         className="demo-loadmore-list"
         itemLayout="horizontal"
